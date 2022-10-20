@@ -5,6 +5,7 @@ then
   curl -k -s "https://publico.fontes.intranet.bb.com.br/f3893418/instalando-linux-ubuntu-based/-/raw/master/lib3270_1540585420-0_amd64.deb?inline=false" -o lib3270_amd64.deb
   curl -k -s "https://publico.fontes.intranet.bb.com.br/f3893418/instalando-linux-ubuntu-based/-/raw/master/pw3270_1540585420-0_amd64.deb?inline=false" -o pw3270_amd64.deb
   curl -s "http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb" -o libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
+  echo "==== OK ===="
 
   #Verificando se os arquivos foram encontrados
   if [ -e lib3270_amd64.deb ] && [ -e pw3270_amd64.deb ] && [ -e libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb ]
@@ -17,9 +18,12 @@ then
     echo "Não foi possível receber os arquivos dos repositórios"
     exit 1
   fi
+  echo "==== OK ===="
 
   #realizando a instalação das dependencias
-  sudo apt --fix-broken install -y
+  echo "==== Iniciando instalação das dependencias ===="
+  sudo apt-get install curl -y >> /dev/null
+  sudo apt-get --fix-broken install -y >> /dev/null
   sudo dpkg -i lib3270_amd64.deb >> /dev/null
   sudo dpkg -i pw3270_amd64.deb >> /dev/null
   sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb >> /dev/null
